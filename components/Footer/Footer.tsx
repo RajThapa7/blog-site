@@ -3,7 +3,7 @@ import SocialLinks from "../SocialLinks/SocialLinks";
 import { AiFillHeart } from "react-icons/ai";
 export default function Footer() {
   return (
-    <div className="flex flex-col px-[3%]">
+    <footer className="flex flex-col px-[3%]">
       <div className="flex gap-x-36 py-6 pt-10">
         <div>
           <SocialLinks />
@@ -18,6 +18,6 @@ export default function Footer() {
           Made with &nbsp; <AiFillHeart /> &nbsp; Kathmandu, Nepal
         </p>
       </div>
-    </div>
+    </footer>
   );
 }
