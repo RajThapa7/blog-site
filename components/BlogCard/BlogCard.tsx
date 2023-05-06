@@ -23,7 +23,7 @@ export default function BlogCard({
   const router = useRouter();
   return (
     <div
-      className="transition-smooth h-fit w-fit rounded-md bg-white px-4 py-6 pt-4 shadow-lg hover:bg-gray-100"
+      className="transition-smooth z-0 h-fit w-fit rounded-md bg-white px-4 py-6 pt-4 shadow-lg hover:bg-gray-100"
       onClick={(e) => {
         router.push("/blog");
       }}
