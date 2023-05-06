@@ -1,11 +1,17 @@
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { Dispatch, ReactNode, SetStateAction, useState } from "react";
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import logo from "public/rajlogo.png";
 import Link from "next/link";
-import { AiOutlineClose } from "react-icons/ai";
 import SearchBar from "../SearchBar/SearchBar";
+import { AiOutlineClose } from "react-icons/ai";
 // import logo from "public/rajlogo.png";
 
 interface NavLink {
@@ -40,11 +46,42 @@ const navLinks: NavLink[] = [
 ];
 
 export default function Navbar() {
+  const [isNavbarVisible, setIsNavbarVisible] = useState<boolean>(true);
+
+  useEffect(() => {
+    let previousScrollPosition = 0;
+    let currentScrollPosition = 0;
+
+    window.addEventListener("scroll", function (e) {
+      // Get the new Value
+      currentScrollPosition = window.pageYOffset;
+
+      //Subtract the two and conclude
+      if (previousScrollPosition - currentScrollPosition < 0) {
+        setIsNavbarVisible(false);
+      } else if (previousScrollPosition - currentScrollPosition > 0) {
+        setIsNavbarVisible(true);
+      }
+
+      // Update the previous value
+      previousScrollPosition = currentScrollPosition;
+    });
+  }, []);
+
   return (
-    <nav className="">
+    <motion.nav
+      className={`fixed z-50 w-full bg-white `}
+      animate={{
+        y: isNavbarVisible ? 0 : -100,
+        transition: {
+          duration: 0.3,
+          type: "just",
+        },
+      }}
+    >
       <HamburgNavbar />
       <FullNavbar />
-    </nav>
+    </motion.nav>
   );
 }
 
@@ -85,12 +122,23 @@ const FullNavbar = () => {
 const HamburgNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   return (
-    <div className="lg:hidden">
+    <div className="z-50 lg:hidden">
       <MobileMenu {...{ setIsMobileMenuOpen, isMobileMenuOpen }} />
 
       <div className="flex items-center justify-between px-6 py-3 shadow-md">
-        <RxHamburgerMenu size={22} onClick={() => setIsMobileMenuOpen(true)} />
-
+        {isMobileMenuOpen ? (
+          <AiOutlineClose
+            size={22}
+            className=""
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+        ) : (
+          <RxHamburgerMenu
+            size={22}
+            onClick={() => setIsMobileMenuOpen(true)}
+          />
+        )}
+        {/* <RxHamburgerMenu size={22} onClick={() => setIsMobileMenuOpen(true)} /> */}
         <div>
           <Image alt="logo" src={logo} width={70} />
         </div>
@@ -101,17 +149,21 @@ const HamburgNavbar = () => {
 
 const list = {
   visible: {
+    y: 0,
     opacity: 1,
     transition: {
       when: "beforeChildren",
       staggerChildren: 0.05,
+      duration: 0.4,
     },
   },
   hidden: {
+    y: -250,
     opacity: 0,
     transition: {
       when: "afterChildren",
       staggerChildren: 0.05,
+      duration: 0.5,
     },
   },
 };
@@ -133,20 +185,20 @@ const MobileMenu = ({
       {isMobileMenuOpen && (
         <motion.div
           key="mobile-menu"
-          className="absolute left-0 top-0 z-10 flex h-[100dvh] w-full flex-col items-center bg-gradient-to-br from-blue-500 to-blue-400 pt-28 text-white"
+          className="absolute left-0 top-16 z-10 flex h-fit w-full flex-col items-center bg-white pb-10 pt-6 text-black shadow-md"
           variants={list}
           initial="hidden"
           animate="visible"
           exit="hidden"
         >
-          <AiOutlineClose
+          {/* <AiOutlineClose
             size={22}
             className="absolute left-6 top-5"
             onClick={() => setIsMobileMenuOpen(false)}
-          />
+          /> */}
           <div className="flex flex-col gap-y-6 text-center">
             {navLinks.map(({ id, title, link, icon }) => (
-              <motion.div key={id} className="text-xl" variants={item}>
+              <motion.div key={id} className="text-lg" variants={item}>
                 <Link href={link}>{title}</Link>
               </motion.div>
             ))}
