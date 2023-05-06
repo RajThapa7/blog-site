@@ -1,11 +1,25 @@
-import Image from "next/image";
-import img from "public/wallpaper.jpg";
-import pic from "public/pro.jpeg";
+import Image, { StaticImageData } from "next/image";
 import { BsDot } from "react-icons/bs";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export default function BlogCard() {
+export interface IBlogCardProps {
+  title: string;
+  author: string;
+  date: string;
+  blogTitleImg: StaticImageData | string;
+  authorImg: StaticImageData | string;
+  readTime: number;
+}
+
+export default function BlogCard({
+  title,
+  author,
+  date,
+  blogTitleImg,
+  authorImg,
+  readTime,
+}: IBlogCardProps) {
   const router = useRouter();
   return (
     <div
@@ -14,21 +28,21 @@ export default function BlogCard() {
         router.push("/blog");
       }}
     >
-      <div className="h-fit w-72">
+      <div className="h-fit w-80">
         <Image
-          src={img}
+          src={blogTitleImg}
           alt="blog-image"
           className="rounded-md object-contain"
         />
         <p className="transition-smooth cursor-pointer py-4 text-lg font-semibold text-gray-700 underline-offset-2 hover:underline">
-          Fundamentals of Javascript
+          {title}
         </p>
 
         {/* author */}
         <div className="flex w-fit gap-x-3 pt-4">
           <div className="h-16 w-16">
             <Image
-              src={pic}
+              src={authorImg}
               alt="profile-pic"
               className="rounded-full object-contain"
               onClick={(e) => {
@@ -43,12 +57,12 @@ export default function BlogCard() {
               onClick={(e) => e.stopPropagation()}
               className="font-semibold text-gray-800"
             >
-              Raj Thapa
+              {author}
             </Link>
             <div className="flex gap-x-4">
-              <p>Jan 10, 2022</p>
+              <p>{date}</p>
               <p className="flex items-center">
-                <BsDot /> 2 min Read
+                <BsDot /> {readTime}&nbsp;min read
               </p>
             </div>
           </div>
