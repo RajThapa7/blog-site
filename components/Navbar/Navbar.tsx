@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Dispatch, ReactNode, SetStateAction, useState } from "react";
-import { BiSearchAlt2 } from "react-icons/bi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import logo from "public/rajlogo.png";
 import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
+import SearchBar from "../SearchBar/SearchBar";
 // import logo from "public/rajlogo.png";
 
 interface NavLink {
@@ -31,12 +31,12 @@ const navLinks: NavLink[] = [
     title: "About Me",
     link: "#",
   },
-  {
-    id: 3,
-    title: "Search",
-    icon: <BiSearchAlt2 />,
-    link: "#",
-  },
+  // {
+  //   id: 3,
+  //   title: "Search",
+  //   icon: <BiSearchAlt2 />,
+  //   link: "#",
+  // },
 ];
 
 export default function Navbar() {
@@ -51,31 +51,31 @@ export default function Navbar() {
 //full size navbar for large screens
 const FullNavbar = () => {
   const [activeId, setActiveId] = useState<number>();
-  console.log(activeId, "activeid");
   return (
-    <div className="hidden items-center justify-between pb-0 pr-28 pt-4 shadow-md lg:flex">
+    <div className="hidden items-center justify-between py-4 pb-2 pr-28 shadow-md lg:flex">
       <div>
         <Image alt="logo" src={logo} width={100} />
       </div>
-      <div className="flex gap-x-10">
+      <div className="flex items-center gap-x-10">
         {navLinks.map(({ id, title, link, icon }) => (
           <div className="group w-fit" key={id} onClick={() => setActiveId(id)}>
             <Link
               href={link}
-              className={`transition-smooth inline-flex items-center gap-x-2 text-lg font-semibold group-hover:text-blue-900 ${
-                activeId === id && "!font-black !text-blue-900"
+              className={`transition-smooth inline-flex items-center gap-x-2 text-lg font-medium group-hover:text-orange-600 ${
+                activeId === id && " !text-blue-900"
               }`}
             >
-              {icon && icon}
+              {/* {icon && icon} */}
               {title}
             </Link>
             <div
               className={`${
-                activeId === id && "!w-full !translate-x-0"
-              } transition-smooth mt-2 h-[3px] w-0 translate-x-[100%] rounded-full bg-blue-800 group-hover:w-full group-hover:translate-x-0`}
+                activeId === id && "!w-full !translate-x-0 !bg-blue-800"
+              } transition-smooth mt-2 h-[3px] w-0 translate-x-[100%] rounded-full group-hover:w-full group-hover:translate-x-0 group-hover:bg-orange-600`}
             ></div>
           </div>
         ))}
+        <SearchBar />
       </div>
     </div>
   );
@@ -133,7 +133,7 @@ const MobileMenu = ({
       {isMobileMenuOpen && (
         <motion.div
           key="mobile-menu"
-          className="absolute left-0 top-0 z-10 flex h-[100dvh] w-full flex-col items-center bg-gray-500 pt-28"
+          className="absolute left-0 top-0 z-10 flex h-[100dvh] w-full flex-col items-center bg-gradient-to-br from-blue-500 to-blue-400 pt-28 text-white"
           variants={list}
           initial="hidden"
           animate="visible"
