@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { BsFacebook } from "react-icons/bs";
+import { BsFacebook, BsGithub } from "react-icons/bs";
 import { BsLinkedin } from "react-icons/bs";
 import { BsTwitter } from "react-icons/bs";
 
@@ -12,15 +12,20 @@ const data = [
   },
 
   {
-    id: 0,
+    id: 1,
     icon: <BsTwitter />,
     link: "https://twitter.com",
   },
 
   {
-    id: 0,
+    id: 2,
     icon: <BsLinkedin />,
     link: "https://linkedin.com",
+  },
+  {
+    id: 3,
+    icon: <BsGithub />,
+    link: "https://github.com/RajThapa7",
   },
 ];
 export default function SocialLinks() {

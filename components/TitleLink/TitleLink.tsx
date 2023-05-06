@@ -1,12 +1,19 @@
 import Link from "next/link";
+import { AiOutlineRight } from "react-icons/ai";
 
-export default function TitleLink() {
+interface ITitleProps {
+  children: React.ReactNode;
+  link: string;
+}
+
+export default function TitleLink({ children, link }: ITitleProps) {
   return (
     <Link
-      href="#"
-      className="transition-smooth text-2xl font-semibold hover:underline-offset-2"
+      href={link}
+      className="transition-smooth flex w-fit items-center gap-x-2 text-xl font-semibold text-gray-800 decoration-blue-800 decoration-2 underline-offset-4 hover:text-blue-800 hover:underline"
     >
-      TitleLink
+      {children}
+      <AiOutlineRight />
     </Link>
   );
 }
