@@ -3,6 +3,7 @@ import BlogCard, { IBlogCardProps } from "@/components/BlogCard/BlogCard";
 import TitleLink from "@/components/TitleLink/TitleLink";
 import { ReactNode } from "react";
 import { BsDashLg } from "react-icons/bs";
+import useFetchArticleList from "./api/hooks/useFetchArticleList";
 
 export interface ArticleDataProps {
   id: number;
@@ -10,50 +11,57 @@ export interface ArticleDataProps {
   blogCards: (IBlogCardProps & { id: number })[];
 }
 
-const ArticleBlock = ({ articleData }: { articleData: ArticleDataProps[] }) => (
-  <>
-    {articleData.map(({ id, bannerTitle, blogCards }) => (
-      <div key={id}>
-        <ArticleCategoryBanner>{bannerTitle}</ArticleCategoryBanner>
-        <div className="relative">
-          <div className="flex gap-x-4 overflow-x-scroll scroll-smooth py-10">
-            {blogCards?.map(
-              ({
-                author,
-                authorImg,
-                blogTitleImg,
-                date,
-                readTime,
-                title,
-                id,
-              }) => (
-                <BlogCard
-                  {...{
-                    author,
-                    authorImg,
-                    blogTitleImg,
-                    date,
-                    readTime,
-                    title,
-                  }}
-                  key={id}
-                />
-              )
-            )}
-          </div>
-          <div className="absolute -right-4 top-0 h-full w-4 bg-white shadow"></div>
-        </div>
+export interface ArticleListType {
+  id: number;
+  date: string;
+  slug: string;
+  title: Title;
+  excerpt: Excerpt;
+  author: number;
+  featured_media: number;
+  categories: number[];
+  tags: any[];
+}
+
+export interface Excerpt {
+  rendered: string;
+  protected: boolean;
+}
+
+export interface Title {
+  rendered: string;
+}
+
+const ArticleBlock = ({ categoryId }: { categoryId: number }) => {
+  const articleData = useFetchArticleList(categoryId);
+
+  return (
+    <div className="relative">
+      <div className="flex gap-x-4 overflow-x-scroll scroll-smooth py-10">
+        {articleData?.map(
+          ({ excerpt, id, date, featured_media, title, author }) => (
+            <BlogCard
+              excerpt={excerpt}
+              author={author}
+              title={title}
+              date={date}
+              featured_media={featured_media}
+              key={id}
+            />
+          )
+        )}
       </div>
-    ))}
-  </>
-);
+      <div className="absolute -right-4 top-0 h-full w-4 bg-white shadow"></div>
+    </div>
+  );
+};
 
 interface IArticleCategoryBannerProps {
   children: ReactNode;
   link?: string;
 }
 
-const ArticleCategoryBanner = ({
+export const ArticleCategoryBanner = ({
   children,
   link = "#",
 }: IArticleCategoryBannerProps) => (
