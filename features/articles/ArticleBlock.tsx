@@ -32,7 +32,7 @@ export interface Title {
   rendered: string;
 }
 
-const ArticleBlock = ({ categoryId }: { categoryId: number }) => {
+const ArticleBlock = ({ categoryId }: { categoryId: number | undefined }) => {
   const articleData = useFetchArticleList(categoryId);
 
   return (
@@ -47,6 +47,7 @@ const ArticleBlock = ({ categoryId }: { categoryId: number }) => {
               date={date}
               featured_media={featured_media}
               key={id}
+              postId={id}
             />
           )
         )}

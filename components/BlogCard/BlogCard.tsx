@@ -13,6 +13,7 @@ export interface IBlogCardProps {
   excerpt: Excerpt;
   author: number;
   featured_media: number;
+  postId: number;
 }
 
 export interface Excerpt {
@@ -30,6 +31,7 @@ export default function BlogCard({
   date,
   excerpt,
   featured_media,
+  postId,
 }: IBlogCardProps) {
   const router = useRouter();
 
@@ -43,10 +45,10 @@ export default function BlogCard({
     <div
       className="transition-smooth z-0 h-fit w-fit cursor-pointer rounded-md bg-white px-4 py-6 pt-4 shadow-lg hover:bg-gray-100"
       onClick={(e) => {
-        router.push("/blog");
+        router.push(`/post/${postId}`);
       }}
     >
-      <div className="h-auto w-[350px]">
+      <div className="h-auto w-[300px] xl:w-[350px]">
         <Image
           src={blogTitleImg || fallbackImg}
           alt="blog-image"

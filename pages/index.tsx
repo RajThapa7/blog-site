@@ -1,4 +1,3 @@
-import MainLayout from "@/Layouts/MainLayout";
 import PageLayout from "@/Layouts/PageLayout";
 import ArticleTitle from "@/components/ArticleTitle/ArticleTitle";
 import Card, { ICardProps } from "@/components/Card/Card";
@@ -59,12 +58,10 @@ const categoriesCardData: ICardProps[] = [
 
 export default function Home() {
   return (
-    <MainLayout>
-      <PageLayout className="bg-gray-50">
-        <Intro />
-        <BrowseAllCategories />
-      </PageLayout>
-    </MainLayout>
+    <PageLayout className="bg-gray-50">
+      <Intro />
+      <BrowseAllCategories />
+    </PageLayout>
   );
 }
 

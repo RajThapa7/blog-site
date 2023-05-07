@@ -25,12 +25,12 @@ const navLinks: NavLink[] = [
   {
     id: 0,
     title: "Home",
-    link: "#",
+    link: "/",
   },
   {
     id: 1,
     title: "Category",
-    link: "#",
+    link: "/category",
   },
   {
     id: 2,

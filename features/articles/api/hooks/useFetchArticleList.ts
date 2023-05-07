@@ -5,7 +5,7 @@ import { ArticleListType } from "../../ArticleBlock";
 
 const getArticleList = async (
   api: AxiosInstance,
-  categoryId: number
+  categoryId: number | string | undefined
 ): Promise<ArticleListType[]> => {
   const result = await api.get("", {
     params: {
@@ -17,11 +17,12 @@ const getArticleList = async (
   return result.data;
 };
 
-const useFetchArticleList = (categoryId: number) => {
+const useFetchArticleList = (categoryId: number | string | undefined) => {
   const api = useCreateApi("post");
   const result = useQuery({
     queryFn: () => getArticleList(api, categoryId),
     queryKey: ["article", "articleList", categoryId],
+    // cacheTime: 1000 * 5,
   });
   return result.data;
 };
