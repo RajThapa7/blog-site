@@ -18,8 +18,10 @@ export default function Category() {
 
   return (
     <PageLayout className="pb-24">
-      <ArticleTitle className="pl-10 !text-2xl">{categoryName}</ArticleTitle>
-      <div className="mt-10 grid grid-cols-1 place-items-center gap-x-10  gap-y-10 overflow-x-hidden md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 ">
+      <ArticleTitle className="flex w-full justify-center !text-2xl md:!text-3xl ">
+        {categoryName}
+      </ArticleTitle>
+      <div className="mt-12 grid grid-cols-1 place-items-center items-start  gap-x-10 gap-y-20 overflow-x-hidden pb-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {articleList?.map(
           ({ id, excerpt, featured_media, date, title, author }) => (
             <BlogCard
