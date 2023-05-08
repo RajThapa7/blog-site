@@ -7,24 +7,24 @@ const data = [
   {
     id: 0,
     icon: <BsFacebook />,
-    link: "https://facebook.com",
+    link: "https://www.facebook.com/raj.thappa.3",
   },
 
   {
     id: 1,
     icon: <BsTwitter />,
-    link: "https://twitter.com",
+    link: "https://twitter.com/rajthapa_7",
   },
 
   {
     id: 2,
     icon: <BsLinkedin />,
-    link: "https://linkedin.com",
+    link: "https://www.linkedin.com/in/rajthapa7/",
   },
   {
     id: 3,
     icon: <BsGithub />,
-    link: "https://github.com/RajThapa7",
+    link: "https://www.github.com/rajthapa7/",
   },
 ];
 

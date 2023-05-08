@@ -11,27 +11,8 @@ import { useRouter } from "next/router";
 import { BsFacebook, BsLinkedin, BsTwitter } from "react-icons/bs";
 import SocialLinks from "@/components/SocialLinks/SocialLinks";
 import { FaShareAlt } from "react-icons/fa";
-
-const data = [
-  { id: -1, icon: <FaShareAlt />, link: "" },
-  {
-    id: 0,
-    icon: <BsFacebook className="text-blue-600" />,
-    link: "https://facebook.com",
-  },
-
-  {
-    id: 1,
-    icon: <BsTwitter className="text-sky-500" />,
-    link: "https://twitter.com",
-  },
-
-  {
-    id: 2,
-    icon: <BsLinkedin className="text-blue-900" />,
-    link: "https://linkedin.com",
-  },
-];
+import { DOMAIN_NAME } from "global/globalData";
+import { useMemo } from "react";
 
 export default function PostIndex() {
   const postId = useRouter().query.id;
@@ -47,6 +28,33 @@ export default function PostIndex() {
     (category) => category.id === post?.categories[0]
   );
   console.log(currentCategory, "currentCategory");
+
+  const currentPath = useRouter().asPath;
+  const fullCurrentPath = DOMAIN_NAME + currentPath;
+
+  const data = useMemo(
+    () => [
+      { id: -1, icon: <FaShareAlt />, link: "" },
+      {
+        id: 0,
+        icon: <BsFacebook className="text-blue-600" />,
+        link: "https://www.facebook.com/sharer.php?u=" + fullCurrentPath,
+      },
+
+      {
+        id: 1,
+        icon: <BsTwitter className="text-sky-500" />,
+        link: `https://twitter.com/share?url=${fullCurrentPath}`,
+      },
+
+      {
+        id: 2,
+        icon: <BsLinkedin className="text-blue-900" />,
+        link: `https://www.linkedin.com/shareArticle?url=${fullCurrentPath}`,
+      },
+    ],
+    [fullCurrentPath]
+  );
 
   return (
     <PageLayout className="flex flex-col items-center bg-white md:bg-gray-50 md:px-24 lg:px-52 xl:px-96">
