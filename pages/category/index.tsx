@@ -20,7 +20,7 @@ export default function Articles() {
               >
                 {name}
               </ArticleCategoryBanner>
-              <ArticleBlock categoryId={id} />
+              <ArticleBlock categoryId={id} className="shadow" />
             </div>
           ))}
     </PageLayout>
