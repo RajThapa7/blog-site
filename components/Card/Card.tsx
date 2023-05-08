@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 export interface ICardProps {
   id: number;
   title: string;
@@ -13,10 +15,11 @@ export default function Card({
   iconClass,
   id,
 }: ICardProps) {
+  const router = useRouter();
   return (
     <div
-      key={id}
       className={`transition-smooth group flex w-40 ${hoverClass} flex-col justify-center rounded-md bg-white px-3 py-12 pl-8 md:w-48 md:py-16`}
+      onClick={() => router.push(`/category/${id}`)}
     >
       <div
         className={`transition-smooth text-7xl ${iconClass} group-hover:text-white`}
