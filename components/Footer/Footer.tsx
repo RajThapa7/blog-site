@@ -1,12 +1,39 @@
+import { BsFacebook, BsGithub, BsLinkedin, BsTwitter } from "react-icons/bs";
 import FooterMenu from "../FooterMenu/FooterMenu";
 import SocialLinks from "../SocialLinks/SocialLinks";
 import { AiFillHeart } from "react-icons/ai";
+
+const data = [
+  {
+    id: 0,
+    icon: <BsFacebook />,
+    link: "https://facebook.com",
+  },
+
+  {
+    id: 1,
+    icon: <BsTwitter />,
+    link: "https://twitter.com",
+  },
+
+  {
+    id: 2,
+    icon: <BsLinkedin />,
+    link: "https://linkedin.com",
+  },
+  {
+    id: 3,
+    icon: <BsGithub />,
+    link: "https://github.com/RajThapa7",
+  },
+];
+
 export default function Footer() {
   return (
     <footer className="flex flex-col bg-gray-200 px-[3%] pb-4 pt-12">
       <div className="flex flex-col gap-x-36 gap-y-10 py-6 pt-10 lg:flex-row">
         <div className="flex w-full justify-center lg:w-fit">
-          <SocialLinks />
+          <SocialLinks {...{ data }} />
         </div>
         <FooterMenu className="flex-grow basis-0" />
       </div>

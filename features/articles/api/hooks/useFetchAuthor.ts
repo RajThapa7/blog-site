@@ -9,7 +9,7 @@ interface AuthorType {
 
 const getAuthorDetails = async (
   api: AxiosInstance,
-  authorId: number
+  authorId: number | undefined
 ): Promise<AuthorType> => {
   const result = await api.get(`/${authorId}`, {
     params: {
@@ -19,7 +19,7 @@ const getAuthorDetails = async (
   return result.data;
 };
 
-const useFetchAuthor = (authorId: number) => {
+const useFetchAuthor = (authorId: number | undefined) => {
   const api = useCreateApi("author");
   const result = useQuery({
     queryFn: () => getAuthorDetails(api, authorId),

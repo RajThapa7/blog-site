@@ -4,6 +4,7 @@ import TitleLink from "@/components/TitleLink/TitleLink";
 import { ReactNode } from "react";
 import { BsDashLg } from "react-icons/bs";
 import useFetchArticleList from "./api/hooks/useFetchArticleList";
+import classNames from "@/utils/className";
 
 export interface ArticleDataProps {
   id: number;
@@ -32,12 +33,18 @@ export interface Title {
   rendered: string;
 }
 
-const ArticleBlock = ({ categoryId }: { categoryId: number }) => {
+const ArticleBlock = ({
+  categoryId,
+  className,
+}: {
+  categoryId: number | undefined;
+  className?: string;
+}) => {
   const articleData = useFetchArticleList(categoryId);
 
   return (
     <div className="relative">
-      <div className="flex gap-x-4 overflow-x-scroll scroll-smooth py-10">
+      <div className="mx-auto flex gap-x-4 overflow-x-scroll scroll-smooth py-10">
         {articleData?.map(
           ({ excerpt, id, date, featured_media, title, author }) => (
             <BlogCard
@@ -47,11 +54,17 @@ const ArticleBlock = ({ categoryId }: { categoryId: number }) => {
               date={date}
               featured_media={featured_media}
               key={id}
+              postId={id}
             />
           )
         )}
       </div>
-      <div className="absolute -right-4 top-0 h-full w-4 bg-white shadow"></div>
+      <div
+        className={classNames(
+          className,
+          `absolute -right-4 top-0 h-full w-4 bg-white`
+        )}
+      ></div>
     </div>
   );
 };

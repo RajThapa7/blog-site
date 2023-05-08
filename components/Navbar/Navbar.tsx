@@ -12,6 +12,7 @@ import logo from "public/rajlogo.png";
 import Link from "next/link";
 import SearchBar from "../SearchBar/SearchBar";
 import { AiOutlineClose } from "react-icons/ai";
+import { useRouter } from "next/router";
 // import logo from "public/rajlogo.png";
 
 interface NavLink {
@@ -25,24 +26,18 @@ const navLinks: NavLink[] = [
   {
     id: 0,
     title: "Home",
-    link: "#",
+    link: "/",
   },
   {
     id: 1,
     title: "Category",
-    link: "#",
+    link: "/category",
   },
   {
     id: 2,
     title: "About Me",
     link: "#",
   },
-  // {
-  //   id: 3,
-  //   title: "Search",
-  //   icon: <BiSearchAlt2 />,
-  //   link: "#",
-  // },
 ];
 
 export default function Navbar() {
@@ -87,24 +82,39 @@ export default function Navbar() {
 
 //full size navbar for large screens
 const FullNavbar = () => {
+  const router = useRouter();
   const [activeId, setActiveId] = useState<number>();
   return (
-    <div className="hidden items-center justify-between py-4 pb-2 pr-28 shadow-md lg:flex">
+    <div className=" hidden cursor-pointer items-center justify-between py-4 pb-2 pr-28 shadow-md lg:flex">
       <div>
-        <Image alt="logo" src={logo} width={100} />
+        <Image
+          alt="logo"
+          src={logo}
+          width={100}
+          onClick={() => {
+            router.push("/");
+            setActiveId(0);
+          }}
+        />
       </div>
       <div className="flex items-center gap-x-10">
         {navLinks.map(({ id, title, link, icon }) => (
-          <div className="group w-fit" key={id} onClick={() => setActiveId(id)}>
-            <Link
-              href={link}
+          <div
+            className="group w-fit"
+            key={id}
+            onClick={() => {
+              router.push(link);
+              setActiveId(id);
+            }}
+          >
+            <p
               className={`transition-smooth inline-flex items-center gap-x-2 text-lg font-medium group-hover:text-orange-600 ${
                 activeId === id && " !text-blue-900"
               }`}
             >
               {/* {icon && icon} */}
               {title}
-            </Link>
+            </p>
             <div
               className={`${
                 activeId === id && "!w-full !translate-x-0 !bg-blue-800"
@@ -199,7 +209,9 @@ const MobileMenu = ({
           <div className="flex flex-col gap-y-6 text-center">
             {navLinks.map(({ id, title, link, icon }) => (
               <motion.div key={id} className="text-lg" variants={item}>
-                <Link href={link}>{title}</Link>
+                <Link href={link} onClick={() => setIsMobileMenuOpen(false)}>
+                  {title}
+                </Link>
               </motion.div>
             ))}
           </div>

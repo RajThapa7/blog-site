@@ -1,4 +1,3 @@
-import MainLayout from "@/Layouts/MainLayout";
 import PageLayout from "@/Layouts/PageLayout";
 import ArticleTitle from "@/components/ArticleTitle/ArticleTitle";
 import Card, { ICardProps } from "@/components/Card/Card";
@@ -11,45 +10,40 @@ import Image from "next/image";
 import Programmer from "public/programmer.svg";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
+import useFetchCategories from "@/features/articles/api/hooks/useFetchCategories";
 
-const categoriesCardData: ICardProps[] = [
+const categoriesCardData: Omit<ICardProps, "id">[] = [
   {
-    id: 0,
     title: "CSS",
     icon: <DiCss3 />,
     hoverClass: "hover:bg-blue-400",
     iconClass: "text-blue-500",
   },
   {
-    id: 1,
     title: "JavaScript",
     icon: <SiJavascript />,
     hoverClass: "hover:bg-[#f0db4f]",
     iconClass: "text-[#f0db4f]",
   },
   {
-    id: 2,
     title: "Typescript",
     icon: <SiTypescript />,
     hoverClass: "hover:bg-blue-500",
     iconClass: "text-blue-500",
   },
   {
-    id: 3,
     title: "React",
     icon: <FaReact />,
     hoverClass: "hover:bg-cyan-400",
     iconClass: "text-cyan-500",
   },
   {
-    id: 4,
     title: "Git",
     icon: <BsGit />,
     hoverClass: "hover:bg-orange-500",
     iconClass: "text-orange-500",
   },
   {
-    id: 5,
     title: "Tailwind",
     icon: <SiTailwindcss />,
     hoverClass: "hover:bg-cyan-500",
@@ -58,24 +52,41 @@ const categoriesCardData: ICardProps[] = [
 ];
 
 export default function Home() {
+  const categories = useFetchCategories();
+
+  const combinedCategoriesData =
+    categories &&
+    categoriesCardData?.map(({ title, icon, hoverClass, iconClass }) => {
+      const id = categories?.find(
+        (item) => title.toLowerCase() === item.name.toLowerCase()
+      )?.id;
+      return {
+        title,
+        hoverClass,
+        iconClass,
+        icon,
+        ...(id ? { id } : { id: -1 }),
+      };
+    });
+
   return (
-    <MainLayout>
-      <PageLayout className="bg-gray-50">
-        <Intro />
-        <BrowseAllCategories />
-      </PageLayout>
-    </MainLayout>
+    <PageLayout className="bg-gray-50">
+      <Intro />
+      {combinedCategoriesData && (
+        <BrowseAllCategories data={combinedCategoriesData} />
+      )}
+    </PageLayout>
   );
 }
 
-const BrowseAllCategories = () => (
+const BrowseAllCategories = ({ data }: { data: ICardProps[] }) => (
   <div>
     <div className="flex justify-between">
       <ArticleTitle>Browse the category </ArticleTitle>
-      <TitleLink link="#">See all categories</TitleLink>
+      <TitleLink link="/category">See all categories</TitleLink>
     </div>
     <div className="grid grid-cols-2 place-items-center gap-y-10 py-10 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-      {categoriesCardData.map(({ hoverClass, title, icon, id, iconClass }) => (
+      {data?.map(({ hoverClass, title, icon, id, iconClass }) => (
         <Card {...{ title, hoverClass, icon, iconClass, id }} key={id} />
       ))}
     </div>
