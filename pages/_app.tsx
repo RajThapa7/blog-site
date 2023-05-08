@@ -14,11 +14,11 @@ Router.events.on("routeChangeError", () => NProgress.done());
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <MainLayout>
-        <QueryProvider>
+      <QueryProvider>
+        <MainLayout>
           <Component {...pageProps} />
-        </QueryProvider>
-      </MainLayout>
+        </MainLayout>
+      </QueryProvider>
     </>
   );
 }
