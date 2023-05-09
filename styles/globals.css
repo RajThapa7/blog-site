@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "./skeletal.css";
+
 .transition-smooth {
   @apply transition-all duration-200 ease-in-out;
 }
