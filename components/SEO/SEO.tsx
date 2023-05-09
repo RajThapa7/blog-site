@@ -24,6 +24,11 @@ export const SEO: FC<seoPagePropsType> = ({
         {title ? title.slice(0, 50) + " | Raj Thapa Blog" : "Raj Thapa Blog"}
       </title>
 
+      <link
+        rel="canonical"
+        href={url ? url : "https://rajthapa.netlify.app/"}
+      ></link>
+
       <meta
         name="title"
         content={
@@ -40,7 +45,10 @@ export const SEO: FC<seoPagePropsType> = ({
       />
 
       {/* <!-- Open Graph / Facebook --> */}
-      <meta property="og:type" content="website" />
+      <meta property="og:image:width" content="1440"></meta>
+      <meta property="og:image:height" content="975"></meta>
+      <meta property="og:image:type" content="image/jpeg"></meta>
+      <meta property="og:type" content="article" />
       <meta
         property="og:description"
         content={
