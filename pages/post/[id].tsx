@@ -15,6 +15,7 @@ import { useMemo } from "react";
 import catimg from "public/cat.jpg";
 import Loader from "@/components/Loader/Loader";
 import dateFormatter from "@/utils/dateFormatter";
+import { SEO } from "@/components/SEO/SEO";
 
 export default function PostIndex() {
   const postId = useRouter().query.id;
@@ -59,6 +60,14 @@ export default function PostIndex() {
 
   return (
     <PageLayout className="flex flex-col items-center bg-white md:bg-gray-50 md:px-24 lg:px-52 xl:px-96">
+      {/* for seo  */}
+      <SEO
+        imageUrl={blogTitleImg}
+        url={fullCurrentPath}
+        title={post?.title?.rendered}
+        description={post?.excerpt?.rendered}
+      />
+
       {post && blogTitleImg ? (
         <>
           <div className="w-full rounded-md pb-12 md:bg-white">
