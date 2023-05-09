@@ -23,6 +23,7 @@ const useFetchArticleList = (categoryId: number | string | undefined) => {
     queryFn: () => getArticleList(api, categoryId),
     queryKey: ["article", "articleList", categoryId],
     // cacheTime: 1000 * 5,
+    staleTime: Infinity,
   });
   return result.data;
 };

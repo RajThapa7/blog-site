@@ -7,6 +7,7 @@ import Link from "next/link";
 import { BsDot } from "react-icons/bs";
 import useFetchAuthor from "@/features/articles/api/hooks/useFetchAuthor";
 import sanitizeHtml from "sanitize-html";
+import dateFormatter from "@/utils/dateFormatter";
 
 export interface IBlogCardProps {
   date: string;
@@ -91,7 +92,7 @@ export default function BlogCard({
               {authorName}
             </Link>
             <div className="flex gap-x-4">
-              <p>{date.slice(0, 10)}</p>
+              <p>{dateFormatter(date)}</p>
               <p className="flex items-center">
                 <BsDot /> 10&nbsp;min read
               </p>

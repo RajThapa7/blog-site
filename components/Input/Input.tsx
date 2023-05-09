@@ -1,10 +1,8 @@
 import { InputHTMLAttributes } from "react";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  //   placeholder: string;
-}
-
-export default function Input({ ...props }: InputProps) {
+export default function Input({
+  ...props
+}: InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       type="text"

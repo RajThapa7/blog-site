@@ -14,6 +14,7 @@ import { DOMAIN_NAME } from "global/globalData";
 import { useMemo } from "react";
 import catimg from "public/cat.jpg";
 import Loader from "@/components/Loader/Loader";
+import dateFormatter from "@/utils/dateFormatter";
 
 export default function PostIndex() {
   const postId = useRouter().query.id;
@@ -28,7 +29,6 @@ export default function PostIndex() {
   const currentCategory = useFetchCategories()?.find(
     (category) => category.id === post?.categories[0]
   );
-  console.log(currentCategory, "currentCategory");
 
   const currentPath = useRouter().asPath;
   const fullCurrentPath = DOMAIN_NAME + currentPath;
@@ -85,7 +85,7 @@ export default function PostIndex() {
                   />
                   <div>
                     <p>{authorName}</p>
-                    <p>{post?.date?.slice(0, 10)}</p>
+                    <p>{dateFormatter(post?.date)}</p>
                   </div>
                 </div>
                 <SocialLinks data={data} />
@@ -113,3 +113,5 @@ export default function PostIndex() {
     </PageLayout>
   );
 }
+
+// export async function getStaticProps() {}

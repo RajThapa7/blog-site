@@ -1,5 +1,5 @@
-import ArticlePageComponent from "@/pages/articles";
 import { Meta, StoryObj } from "@storybook/react";
+import ArticlePageComponent from "pages/category";
 
 const meta: Meta<typeof ArticlePageComponent> = {
   title: "pages/Articles",
