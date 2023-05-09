@@ -13,7 +13,7 @@ export default function ArticleTitle({
     <p
       className={classNames(
         className,
-        `transition-smooth flex w-fit cursor-pointer items-center gap-x-1 text-xl font-semibold decoration-blue-600 underline-offset-4`
+        `transition-smooth flex w-fit cursor-pointer items-center gap-x-1 text-xl font-semibold decoration-blue-600 underline-offset-4 dark:text-gray-400`
       )}
     >
       {children}

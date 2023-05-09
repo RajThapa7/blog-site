@@ -1,4 +1,4 @@
-import PageLayout from "@/Layouts/PageLayout";
+import PageLayout from "@/layouts/PageLayout";
 import ArticleTitle from "@/components/ArticleTitle/ArticleTitle";
 import Card, { ICardProps } from "@/components/Card/Card";
 import TitleLink from "@/components/TitleLink/TitleLink";
@@ -17,37 +17,37 @@ const categoriesCardData: Omit<ICardProps, "id">[] = [
   {
     title: "CSS",
     icon: <DiCss3 />,
-    hoverClass: "hover:bg-blue-400",
+    hoverClass: "hover:bg-blue-400 dark:hover:bg-blue-700",
     iconClass: "text-blue-500",
   },
   {
     title: "JavaScript",
     icon: <SiJavascript />,
-    hoverClass: "hover:bg-[#f0db4f]",
+    hoverClass: "dark:hover:bg-yellow-600 hover:bg-[#f0db4f]",
     iconClass: "text-[#f0db4f]",
   },
   {
     title: "Typescript",
     icon: <SiTypescript />,
-    hoverClass: "hover:bg-blue-500",
+    hoverClass: "hover:bg-blue-500 dark:hover:bg-blue-900",
     iconClass: "text-blue-500",
   },
   {
     title: "React",
     icon: <FaReact />,
-    hoverClass: "hover:bg-cyan-400",
+    hoverClass: "dark:hover:bg-cyan-600 hover:bg-cyan-400",
     iconClass: "text-cyan-500",
   },
   {
     title: "Git",
     icon: <BsGit />,
-    hoverClass: "hover:bg-orange-500",
+    hoverClass: "dark:hover:bg-orange-700 hover:bg-orange-500",
     iconClass: "text-orange-500",
   },
   {
     title: "Tailwind",
     icon: <SiTailwindcss />,
-    hoverClass: "hover:bg-cyan-500",
+    hoverClass: "dark:hover:bg-cyan-700 hover:bg-cyan-500",
     iconClass: "text-cyan-500",
   },
 ];
@@ -71,7 +71,7 @@ export default function Home() {
     });
 
   return (
-    <PageLayout className="bg-gray-50">
+    <PageLayout className="bg-gray-50 dark:bg-gray-900">
       <Intro />
       {combinedCategoriesData ? (
         <BrowseAllCategories data={combinedCategoriesData} />
@@ -99,11 +99,11 @@ const BrowseAllCategories = ({ data }: { data: ICardProps[] }) => (
 const Intro = () => (
   <div className="flex items-center py-12 pb-32 lg:pb-64">
     <div className="flex flex-grow basis-60 flex-col gap-y-8">
-      <div className="flex flex-col gap-y-3 pb-4 text-4xl font-semibold text-gray-800 md:text-5xl">
+      <div className="flex flex-col gap-y-3 pb-4 text-4xl font-semibold text-gray-800 dark:text-gray-300 md:text-5xl">
         <p>Hi, I&apos;m Raj Thapa</p>
         <p>Front End Dev</p>
       </div>
-      <div className="border-l-4 border-gray-600 pl-2">
+      <div className="border-l-4 border-gray-600 pl-2 dark:text-gray-200">
         <p>
           On this blog, I share tips and tricks about different frameworks,
           projects, tutorials, and more.

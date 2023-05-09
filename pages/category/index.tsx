@@ -1,4 +1,4 @@
-import PageLayout from "@/Layouts/PageLayout";
+import PageLayout from "@/layouts/PageLayout";
 import Loader from "@/components/Loader/Loader";
 import ArticleBlock, {
   ArticleCategoryBanner,
@@ -10,7 +10,7 @@ export default function Articles() {
   const categories = useFetchCategories();
   const router = useRouter();
   return (
-    <PageLayout className="space-y-10 md:space-y-20">
+    <PageLayout className="space-y-10 dark:bg-gray-900 md:space-y-20">
       {categories ? (
         categories
           ?.filter((category) => category.count > 0)

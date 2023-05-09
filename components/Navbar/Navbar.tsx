@@ -13,6 +13,7 @@ import Link from "next/link";
 import SearchBar from "../SearchBar/SearchBar";
 import { AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/router";
+import DarkModeToggel from "../DarkModeToggle/DarkModeToggel";
 // import logo from "public/rajlogo.png";
 
 interface NavLink {
@@ -65,7 +66,7 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className={`fixed z-50 w-full bg-white `}
+      className={`transition-smooth fixed z-50 w-full bg-white dark:bg-[rgb(13,20,35)] dark:text-gray-300`}
       animate={{
         y: isNavbarVisible ? 0 : -100,
         transition: {
@@ -85,7 +86,7 @@ const FullNavbar = () => {
   const router = useRouter();
   const [activeId, setActiveId] = useState<number>();
   return (
-    <div className=" hidden cursor-pointer items-center justify-between py-4 pb-2 pr-28 shadow-md lg:flex">
+    <div className=" hidden cursor-pointer items-center justify-between py-4 pb-2 pr-28 shadow-md dark:shadow-[rgb(22,30,49)] lg:flex">
       <div>
         <Image
           alt="logo"
@@ -123,6 +124,7 @@ const FullNavbar = () => {
           </div>
         ))}
         <SearchBar />
+        <DarkModeToggel />
       </div>
     </div>
   );

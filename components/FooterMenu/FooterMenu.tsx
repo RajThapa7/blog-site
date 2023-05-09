@@ -108,7 +108,7 @@ export default function FooterMenu({ className }: { className?: string }) {
     >
       {data.map(({ id: pid, title, menuData }) => (
         <div key={pid}>
-          <p className="font-semibold uppercase text-gray-800 md:text-lg">
+          <p className="font-semibold uppercase text-gray-800 dark:text-gray-400 md:text-lg">
             {title}
           </p>
           <ul className="mt-4 flex flex-col gap-y-2">
@@ -119,7 +119,7 @@ export default function FooterMenu({ className }: { className?: string }) {
                   {...(pid === 3 && {
                     target: "_blank",
                   })}
-                  className="transition-smooth text-gray-800 hover:text-blue-800 md:text-lg"
+                  className="transition-smooth text-gray-800 hover:text-blue-800 dark:text-gray-500 dark:hover:text-blue-400 md:text-lg"
                 >
                   {title}
                 </Link>
