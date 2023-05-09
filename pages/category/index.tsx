@@ -1,4 +1,5 @@
 import PageLayout from "@/Layouts/PageLayout";
+import BlogCardSkeletal from "@/components/Skeletal/BlogCardSkeletal";
 import ArticleBlock, {
   ArticleCategoryBanner,
 } from "@/features/articles/ArticleBlock";
@@ -10,7 +11,7 @@ export default function Articles() {
   const router = useRouter();
   return (
     <PageLayout className="space-y-10 md:space-y-20">
-      {categories &&
+      {categories ? (
         categories
           ?.filter((category) => category.count > 0)
           ?.map(({ id, name }) => (
@@ -22,7 +23,10 @@ export default function Articles() {
               </ArticleCategoryBanner>
               <ArticleBlock categoryId={id} className="shadow" />
             </div>
-          ))}
+          ))
+      ) : (
+        <BlogCardSkeletal />
+      )}
     </PageLayout>
   );
 }

@@ -4,7 +4,7 @@ import { AxiosInstance } from "axios";
 
 const getFeaturedMedia = async (
   api: AxiosInstance,
-  featuredMediaId: number
+  featuredMediaId: number | undefined
 ): Promise<{ source_url: string }> => {
   const result = await api.get(`/${featuredMediaId}`, {
     params: {
@@ -14,7 +14,7 @@ const getFeaturedMedia = async (
   return result.data;
 };
 
-const useFetchFeaturedMedia = (featuredMediaId: number) => {
+const useFetchFeaturedMedia = (featuredMediaId: number | undefined) => {
   const api = useCreateApi("media");
   const result = useQuery({
     queryFn: () => getFeaturedMedia(api, featuredMediaId),

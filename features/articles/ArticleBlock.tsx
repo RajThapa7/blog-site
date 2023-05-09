@@ -44,7 +44,7 @@ const ArticleBlock = ({
 
   return (
     <div className="relative">
-      <div className="mx-auto flex gap-x-4 overflow-x-scroll scroll-smooth py-10">
+      <div className="flex gap-x-4 overflow-x-scroll scroll-smooth py-10">
         {articleData?.map(
           ({ excerpt, id, date, featured_media, title, author }) => (
             <BlogCard

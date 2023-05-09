@@ -1,6 +1,5 @@
 import PageLayout from "@/Layouts/PageLayout";
 import Image from "next/image";
-import Programmer from "public/wallpaper.jpg";
 import Raj from "public/pro.jpeg";
 import useFetchPost from "@/features/articles/api/hooks/useFetchPost";
 import useFetchFeaturedMedia from "@/features/articles/api/hooks/useFetchFeaturedImage";
@@ -13,12 +12,14 @@ import SocialLinks from "@/components/SocialLinks/SocialLinks";
 import { FaShareAlt } from "react-icons/fa";
 import { DOMAIN_NAME } from "global/globalData";
 import { useMemo } from "react";
+import catimg from "public/cat.jpg";
 
 export default function PostIndex() {
   const postId = useRouter().query.id;
   const post = useFetchPost(Number(postId));
 
-  const blogTitleImg = useFetchFeaturedMedia(16)?.source_url;
+  const blogTitleImg = useFetchFeaturedMedia(post?.featured_media)?.source_url;
+  console.log(blogTitleImg, "blogTitleImg");
 
   const authorDetails = useFetchAuthor(post?.author);
   const authorName = authorDetails?.name;
@@ -62,7 +63,7 @@ export default function PostIndex() {
         <div className="w-full rounded-md pb-12 md:bg-white">
           <div className="relative w-full pt-[60%]">
             <Image
-              src={blogTitleImg || Programmer}
+              src={blogTitleImg || catimg}
               alt="programmer"
               fill
               className="absolute left-0 top-0 h-full w-full rounded-t-md object-fill"
