@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 import { BsDashLg } from "react-icons/bs";
 import useFetchArticleList from "./api/hooks/useFetchArticleList";
 import classNames from "@/utils/className";
+import BlogCardSkeletal from "@/components/Skeletal/BlogCardSkeletal";
 
 export interface ArticleDataProps {
   id: number;
@@ -45,18 +46,22 @@ const ArticleBlock = ({
   return (
     <div className="relative">
       <div className="flex gap-x-4 overflow-x-scroll scroll-smooth py-10">
-        {articleData?.map(
-          ({ excerpt, id, date, featured_media, title, author }) => (
-            <BlogCard
-              excerpt={excerpt}
-              author={author}
-              title={title}
-              date={date}
-              featured_media={featured_media}
-              key={id}
-              postId={id}
-            />
+        {articleData ? (
+          articleData.map(
+            ({ excerpt, id, date, featured_media, title, author }) => (
+              <BlogCard
+                excerpt={excerpt}
+                author={author}
+                title={title}
+                date={date}
+                featured_media={featured_media}
+                key={id}
+                postId={id}
+              />
+            )
           )
+        ) : (
+          <BlogCardSkeletal />
         )}
       </div>
       <div

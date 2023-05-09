@@ -11,6 +11,7 @@ import Programmer from "public/programmer.svg";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
 import useFetchCategories from "@/features/articles/api/hooks/useFetchCategories";
+import CategoryCardSkeletal from "@/components/Skeletal/CategoryCardSkeletal";
 
 const categoriesCardData: Omit<ICardProps, "id">[] = [
   {
@@ -53,6 +54,7 @@ const categoriesCardData: Omit<ICardProps, "id">[] = [
 
 export default function Home() {
   const categories = useFetchCategories();
+  console.log(categories, "categories");
 
   const combinedCategoriesData =
     categories &&
@@ -69,11 +71,15 @@ export default function Home() {
       };
     });
 
+  console.log(combinedCategoriesData, "combinedCategoriesData");
+
   return (
     <PageLayout className="bg-gray-50">
       <Intro />
-      {combinedCategoriesData && (
+      {combinedCategoriesData ? (
         <BrowseAllCategories data={combinedCategoriesData} />
+      ) : (
+        <CategoryCardSkeletal />
       )}
     </PageLayout>
   );
@@ -97,7 +103,7 @@ const Intro = () => (
   <div className="flex items-center py-12 pb-32 lg:pb-64">
     <div className="flex flex-grow basis-60 flex-col gap-y-8">
       <div className="flex flex-col gap-y-3 pb-4 text-4xl font-semibold text-gray-800 md:text-5xl">
-        <p>Hi, I'm Raj Thapa</p>
+        <p>Hi, I&apos;m Raj Thapa</p>
         <p>Front End Dev</p>
       </div>
       <div className="border-l-4 border-gray-600 pl-2">

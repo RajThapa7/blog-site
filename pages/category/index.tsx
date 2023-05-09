@@ -1,5 +1,5 @@
 import PageLayout from "@/Layouts/PageLayout";
-import BlogCardSkeletal from "@/components/Skeletal/BlogCardSkeletal";
+import Loader from "@/components/Loader/Loader";
 import ArticleBlock, {
   ArticleCategoryBanner,
 } from "@/features/articles/ArticleBlock";
@@ -25,7 +25,7 @@ export default function Articles() {
             </div>
           ))
       ) : (
-        <BlogCardSkeletal />
+        <Loader />
       )}
     </PageLayout>
   );

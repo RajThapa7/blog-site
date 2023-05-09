@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import useFetchFeaturedMedia from "@/features/articles/api/hooks/useFetchFeaturedImage";
-import fallbackImg from "public/wallpaper.jpg";
+import fallbackImg from "public/placeholder.webp";
+import userFallbackImg from "public/userPlaceholder.webp";
 import Link from "next/link";
 import { BsDot } from "react-icons/bs";
 import useFetchAuthor from "@/features/articles/api/hooks/useFetchAuthor";
@@ -71,7 +72,7 @@ export default function BlogCard({
         <div className="flex w-fit items-center justify-center gap-x-3 pt-4">
           <div className="relative h-12 w-12 rounded-full">
             <Image
-              src={authorImg || fallbackImg}
+              src={authorImg || userFallbackImg}
               alt="profile-pic"
               className="absolute rounded-full object-fill"
               onClick={(e) => {
