@@ -19,6 +19,8 @@ const useFetchFeaturedMedia = (featuredMediaId: number | undefined) => {
   const result = useQuery({
     queryFn: () => getFeaturedMedia(api, featuredMediaId),
     queryKey: ["article", "featuredMedia", featuredMediaId],
+    cacheTime: 1000 * 60 * 30,
+    staleTime: 1000 * 60 * 20,
   });
   return result.data;
 };

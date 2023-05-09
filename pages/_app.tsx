@@ -5,6 +5,7 @@ import type { AppProps } from "next/app";
 import { Router } from "next/router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 NProgress.configure({ showSpinner: false });
 Router.events.on("routeChangeStart", () => NProgress.start());
@@ -15,6 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <QueryProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
         <MainLayout>
           <Component {...pageProps} />
         </MainLayout>

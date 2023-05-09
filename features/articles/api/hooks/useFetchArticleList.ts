@@ -22,8 +22,8 @@ const useFetchArticleList = (categoryId: number | string | undefined) => {
   const result = useQuery({
     queryFn: () => getArticleList(api, categoryId),
     queryKey: ["article", "articleList", categoryId],
-    // cacheTime: 1000 * 5,
-    staleTime: Infinity,
+    cacheTime: 1000 * 60 * 30,
+    staleTime: 1000 * 60 * 20,
   });
   return result.data;
 };

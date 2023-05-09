@@ -1,3 +1,3 @@
-const DOMAIN_NAME = "https://www.example.com";
+const DOMAIN_NAME = "https://rajthapablog.netlify.app/";
 
 export { DOMAIN_NAME };

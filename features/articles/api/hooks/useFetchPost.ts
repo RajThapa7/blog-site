@@ -39,6 +39,8 @@ const useFetchPost = (postId: number) => {
   const result = useQuery({
     queryFn: () => getPost(api, postId),
     queryKey: ["article", "post", postId],
+    cacheTime: 1000 * 60 * 30,
+    staleTime: 1000 * 60 * 20,
   });
   return result.data;
 };
