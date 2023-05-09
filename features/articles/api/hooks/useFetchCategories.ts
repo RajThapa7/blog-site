@@ -25,6 +25,8 @@ const useFetchCategories = () => {
   const result = useQuery({
     queryFn: () => getCategories(api),
     queryKey: ["article", "categories"],
+    cacheTime: 1000 * 60 * 30,
+    staleTime: 1000 * 60 * 20,
   });
   return result.data;
 };

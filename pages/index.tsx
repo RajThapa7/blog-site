@@ -54,7 +54,6 @@ const categoriesCardData: Omit<ICardProps, "id">[] = [
 
 export default function Home() {
   const categories = useFetchCategories();
-  console.log(categories, "categories");
 
   const combinedCategoriesData =
     categories &&
@@ -70,8 +69,6 @@ export default function Home() {
         ...(id ? { id } : { id: -1 }),
       };
     });
-
-  console.log(combinedCategoriesData, "combinedCategoriesData");
 
   return (
     <PageLayout className="bg-gray-50">

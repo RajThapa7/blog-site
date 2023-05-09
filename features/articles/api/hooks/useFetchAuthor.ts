@@ -24,6 +24,8 @@ const useFetchAuthor = (authorId: number | undefined) => {
   const result = useQuery({
     queryFn: () => getAuthorDetails(api, authorId),
     queryKey: ["article", authorId],
+    cacheTime: 1000 * 60 * 30,
+    staleTime: 1000 * 60 * 20,
   });
   return result.data;
 };
