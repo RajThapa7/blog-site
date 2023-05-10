@@ -1,3 +1,4 @@
+import { useDarkMode } from "@/layouts/ThemeProvider";
 import classNames from "@/utils/className";
 
 export default function CategoryCardSkeletal({
@@ -6,6 +7,7 @@ export default function CategoryCardSkeletal({
   className?: string;
 }) {
   const arr = Array.from(Array(6).keys());
+  const darkMode = useDarkMode()?.darkMode;
   return (
     <div
       className={classNames(
@@ -14,9 +16,12 @@ export default function CategoryCardSkeletal({
     >
       {arr.map((index: number) => {
         return (
-          <div key={index} className="flex flex-col">
-            <div className=" animate-shimmer mb-2 h-48 w-40 rounded-xl bg-gray-200 p-5 lg:h-60 lg:w-52 "></div>
-          </div>
+          <div
+            key={index}
+            className={`${
+              darkMode ? "dark-animate-shimmer" : "animate-shimmer"
+            } mb-2 h-48 w-40 rounded-xl bg-gray-200 p-5 lg:h-60 lg:w-52`}
+          ></div>
         );
       })}
     </div>

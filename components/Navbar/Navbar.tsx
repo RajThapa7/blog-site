@@ -3,8 +3,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   Dispatch,
   ReactNode,
+  Ref,
   SetStateAction,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -15,6 +17,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/router";
 import DarkModeToggel from "../DarkModeToggle/DarkModeToggel";
 import DarkModeToggle from "../DarkModeToggle/DarkModeToggel";
+import { useComponentVisible } from "@/hooks/useComponentVisible";
 
 interface NavLink {
   id: number;
@@ -132,24 +135,33 @@ const FullNavbar = () => {
 
 //hamburger menu for small screens
 const HamburgNavbar = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const buttonRef = useRef(null);
+  const { ref, isComponentVisible, setIsComponentVisible } =
+    useComponentVisible(false, buttonRef);
   return (
     <div className="relative z-50 lg:hidden">
-      <MobileMenu {...{ setIsMobileMenuOpen, isMobileMenuOpen }} />
+      <MobileMenu
+        isMobileMenuOpen={isComponentVisible}
+        setIsMobileMenuOpen={setIsComponentVisible}
+        mobileRef={ref}
+      />
 
       <div className="flex items-center justify-between px-6 py-3 shadow-md">
-        {isMobileMenuOpen ? (
-          <AiOutlineClose
-            size={22}
-            className=""
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
-        ) : (
-          <RxHamburgerMenu
-            size={22}
-            onClick={() => setIsMobileMenuOpen(true)}
-          />
-        )}
+        <div ref={buttonRef}>
+          {isComponentVisible ? (
+            <AiOutlineClose
+              size={22}
+              className=""
+              onClick={() => setIsComponentVisible(false)}
+            />
+          ) : (
+            <RxHamburgerMenu
+              size={22}
+              onClick={() => setIsComponentVisible(true)}
+            />
+          )}
+        </div>
         <div>
           <Image alt="logo" src={logo} width={70} />
         </div>
@@ -187,9 +199,11 @@ const item = {
 const MobileMenu = ({
   setIsMobileMenuOpen,
   isMobileMenuOpen,
+  mobileRef,
 }: {
   isMobileMenuOpen: boolean;
   setIsMobileMenuOpen: Dispatch<SetStateAction<boolean>>;
+  mobileRef: Ref<HTMLDivElement>;
 }) => {
   return (
     <AnimatePresence>
@@ -201,6 +215,7 @@ const MobileMenu = ({
           initial="hidden"
           animate="visible"
           exit="hidden"
+          ref={mobileRef}
         >
           <div className="flex flex-col gap-y-6 text-center">
             <div>

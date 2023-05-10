@@ -22,16 +22,6 @@ export default function DarkModeToggle() {
 
   togggleDarkClass();
 
-  console.log(darkMode, "darkMode");
-
-  const DarkModeToggleButton = useCallback(() => {
-    return darkMode ? (
-      <FaSun size={25} className="text-yellow-500" />
-    ) : (
-      <BsMoonFill size={25} className="text-purple-500" />
-    );
-  }, [darkMode]);
-
   return (
     <button
       type="button"
@@ -41,3 +31,20 @@ export default function DarkModeToggle() {
     </button>
   );
 }
+
+const DarkModeToggleButton = () => {
+  const darkMode = useDarkMode()?.darkMode;
+
+  return (
+    <>
+      {!darkMode && <BsMoonFill size={25} className="text-purple-500" />}
+      {darkMode && <FaSun size={25} className="text-yellow-500" />}
+    </>
+  );
+};
+
+// darkMode ? (
+//   <FaSun size={25} className="text-yellow-500" />
+// ) : (
+//   <BsMoonFill size={25} className="text-purple-500" />
+// );

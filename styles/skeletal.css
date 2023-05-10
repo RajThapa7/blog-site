@@ -9,12 +9,12 @@
   animation: shimmer 1.5s infinite linear;
 }
 
-.flight-skeleton-shimmer {
+.dark-animate-shimmer {
   background-image: linear-gradient(
     90deg,
-    #f4f4f4ef 0px,
-    #f7f6fa 200px,
-    #e7edf1 400px
+    #524f4f 0px,
+    #807c7c 200px,
+    #524f4f 400px
   );
   background-size: 1200px;
   animation: shimmer 1.5s infinite linear;
