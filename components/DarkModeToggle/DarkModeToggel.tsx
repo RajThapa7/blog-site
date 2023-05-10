@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { BsMoonFill } from "react-icons/bs";
 import { FaSun } from "react-icons/fa";
 
-export default function DarkModeToggel() {
+export default function DarkModeToggle() {
   const darkMode = useDarkMode()?.darkMode;
   const setDarkMode = useDarkMode()?.setDarkMode;
 

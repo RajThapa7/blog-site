@@ -16,6 +16,7 @@ import catimg from "public/cat.jpg";
 import Loader from "@/components/Loader/Loader";
 import dateFormatter from "@/utils/dateFormatter";
 import { SEO } from "@/components/SEO/SEO";
+import { useDarkMode } from "@/layouts/ThemeProvider";
 
 export default function PostIndex() {
   const postId = useRouter().query.id;
@@ -33,6 +34,8 @@ export default function PostIndex() {
 
   const currentPath = useRouter().asPath;
   const fullCurrentPath = DOMAIN_NAME + currentPath;
+
+  const dark = useDarkMode()?.darkMode;
 
   const data = useMemo(
     () => [
@@ -71,7 +74,7 @@ export default function PostIndex() {
             description={post?.title?.rendered}
           />
 
-          <div className="w-full rounded-md pb-12 dark:bg-gray-800 md:bg-white">
+          <div className="w-full rounded-md pb-12 md:bg-white md:dark:bg-gray-800">
             <div className="relative w-full pt-[60%]">
               <Image
                 src={blogTitleImg || catimg}
@@ -108,13 +111,13 @@ export default function PostIndex() {
             </div>
           </div>
           <div className="my-20 h-[2px] w-full rounded-full bg-gray-300"></div>
-          <h2 className="self-start text-2xl font-semibold">
+          <h2 className="self-start text-2xl font-semibold dark:text-gray-300">
             See Topics Related to {currentCategory?.name}
           </h2>
           <div className="w-full">
             <ArticleBlock
               categoryId={currentCategory?.id}
-              className="shadow-gray !bg-gray-50"
+              className={dark ? "dark-shadow" : "shadow-gray !bg-gray-50"}
             />
           </div>
         </>

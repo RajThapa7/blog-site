@@ -14,7 +14,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import { AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/router";
 import DarkModeToggel from "../DarkModeToggle/DarkModeToggel";
-// import logo from "public/rajlogo.png";
+import DarkModeToggle from "../DarkModeToggle/DarkModeToggel";
 
 interface NavLink {
   id: number;
@@ -86,7 +86,7 @@ const FullNavbar = () => {
   const router = useRouter();
   const [activeId, setActiveId] = useState<number>();
   return (
-    <div className=" hidden cursor-pointer items-center justify-between py-4 pb-2 pr-28 shadow-md dark:shadow-[rgb(22,30,49)] lg:flex">
+    <div className="hidden cursor-pointer items-center justify-between py-4 pb-2 pr-28 shadow-md dark:shadow-[rgb(22,30,49)] lg:flex">
       <div>
         <Image
           alt="logo"
@@ -110,7 +110,7 @@ const FullNavbar = () => {
           >
             <p
               className={`transition-smooth inline-flex items-center gap-x-2 text-lg font-medium group-hover:text-orange-600 ${
-                activeId === id && " !text-blue-900"
+                activeId === id && " !text-blue-900 dark:!text-blue-500"
               }`}
             >
               {/* {icon && icon} */}
@@ -124,7 +124,7 @@ const FullNavbar = () => {
           </div>
         ))}
         <SearchBar />
-        <DarkModeToggel />
+        <DarkModeToggle />
       </div>
     </div>
   );
@@ -134,7 +134,7 @@ const FullNavbar = () => {
 const HamburgNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   return (
-    <div className="z-50 lg:hidden">
+    <div className="relative z-50 lg:hidden">
       <MobileMenu {...{ setIsMobileMenuOpen, isMobileMenuOpen }} />
 
       <div className="flex items-center justify-between px-6 py-3 shadow-md">
@@ -150,7 +150,6 @@ const HamburgNavbar = () => {
             onClick={() => setIsMobileMenuOpen(true)}
           />
         )}
-        {/* <RxHamburgerMenu size={22} onClick={() => setIsMobileMenuOpen(true)} /> */}
         <div>
           <Image alt="logo" src={logo} width={70} />
         </div>
@@ -197,18 +196,16 @@ const MobileMenu = ({
       {isMobileMenuOpen && (
         <motion.div
           key="mobile-menu"
-          className="absolute left-0 top-16 z-10 flex h-fit w-full flex-col items-center bg-white pb-10 pt-6 text-black shadow-md"
+          className="absolute left-0 top-16 z-10 flex h-fit w-full flex-col items-center bg-white pb-10 pt-6 text-black shadow-md dark:bg-[rgb(13,20,35)] dark:text-gray-200 dark:shadow-gray-800"
           variants={list}
           initial="hidden"
           animate="visible"
           exit="hidden"
         >
-          {/* <AiOutlineClose
-            size={22}
-            className="absolute left-6 top-5"
-            onClick={() => setIsMobileMenuOpen(false)}
-          /> */}
           <div className="flex flex-col gap-y-6 text-center">
+            <div>
+              <DarkModeToggel />
+            </div>
             {navLinks.map(({ id, title, link, icon }) => (
               <motion.div key={id} className="text-lg" variants={item}>
                 <Link href={link} onClick={() => setIsMobileMenuOpen(false)}>

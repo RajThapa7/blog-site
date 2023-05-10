@@ -67,7 +67,7 @@ const ArticleBlock = ({
       <div
         className={classNames(
           className,
-          `absolute -right-4 top-0 h-full w-4 bg-white`
+          `absolute -right-4 top-0 h-full w-4 bg-white dark:bg-gray-900`
         )}
       ></div>
     </div>
