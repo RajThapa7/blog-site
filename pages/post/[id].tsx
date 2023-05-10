@@ -1,4 +1,4 @@
-import PageLayout from "@/Layouts/PageLayout";
+import PageLayout from "@/layouts/PageLayout";
 import Image from "next/image";
 import Raj from "public/pro.jpeg";
 import useFetchPost from "@/features/articles/api/hooks/useFetchPost";
@@ -16,6 +16,7 @@ import catimg from "public/cat.jpg";
 import Loader from "@/components/Loader/Loader";
 import dateFormatter from "@/utils/dateFormatter";
 import { SEO } from "@/components/SEO/SEO";
+import { useDarkMode } from "@/layouts/ThemeProvider";
 
 export default function PostIndex() {
   const postId = useRouter().query.id;
@@ -33,6 +34,8 @@ export default function PostIndex() {
 
   const currentPath = useRouter().asPath;
   const fullCurrentPath = DOMAIN_NAME + currentPath;
+
+  const dark = useDarkMode()?.darkMode;
 
   const data = useMemo(
     () => [
@@ -59,7 +62,7 @@ export default function PostIndex() {
   );
 
   return (
-    <PageLayout className="flex flex-col items-center bg-white md:bg-gray-50 md:px-24 lg:px-52 xl:px-96">
+    <PageLayout className="flex flex-col items-center bg-white dark:bg-gray-900 md:bg-gray-50 md:px-24 lg:px-52 xl:px-96">
       {/* for seo  */}
 
       {post && blogTitleImg ? (
@@ -71,7 +74,7 @@ export default function PostIndex() {
             description={post?.title?.rendered}
           />
 
-          <div className="w-full rounded-md pb-12 md:bg-white">
+          <div className="w-full rounded-md pb-12 md:bg-white md:dark:bg-gray-800">
             <div className="relative w-full pt-[60%]">
               <Image
                 src={blogTitleImg || catimg}
@@ -81,7 +84,7 @@ export default function PostIndex() {
               />
             </div>
             <div className="md:px-12">
-              <h2 className="pb-4 pt-10 text-xl font-semibold md:text-2xl lg:text-3xl">
+              <h2 className="pb-4 pt-10 text-xl font-semibold dark:text-gray-200 md:text-2xl lg:text-3xl">
                 {post?.title.rendered}
               </h2>
               <div className="flex w-full items-center justify-between pb-14 pt-10">
@@ -93,7 +96,7 @@ export default function PostIndex() {
                     height={48}
                     className="rounded-full"
                   />
-                  <div>
+                  <div className="dark:text-gray-400">
                     <p>{authorName}</p>
                     <p>{dateFormatter(post?.date)}</p>
                   </div>
@@ -102,18 +105,19 @@ export default function PostIndex() {
               </div>
 
               <div
+                className="dark:text-gray-200"
                 dangerouslySetInnerHTML={{ __html: post?.content.rendered }}
               />
             </div>
           </div>
           <div className="my-20 h-[2px] w-full rounded-full bg-gray-300"></div>
-          <h2 className="self-start text-2xl font-semibold">
+          <h2 className="self-start text-2xl font-semibold dark:text-gray-300">
             See Topics Related to {currentCategory?.name}
           </h2>
           <div className="w-full">
             <ArticleBlock
               categoryId={currentCategory?.id}
-              className="shadow-gray !bg-gray-50"
+              className={dark ? "dark-shadow" : "shadow-gray !bg-gray-50"}
             />
           </div>
         </>

@@ -45,7 +45,7 @@ export default function BlogCard({
 
   return (
     <div
-      className="transition-smooth z-0 h-fit w-[320px] cursor-pointer rounded-md bg-white pb-6 shadow-lg hover:bg-gray-100 lg:w-[400px] xl:w-[370px]"
+      className="transition-smooth z-0 h-fit w-[320px] cursor-pointer rounded-md bg-white pb-6 shadow-lg hover:bg-gray-100 dark:bg-gray-800 lg:w-[400px] xl:w-[370px]"
       onClick={(e) => {
         router.push(`/post/${postId}`);
       }}
@@ -60,13 +60,13 @@ export default function BlogCard({
       </div>
 
       <div className="w-full px-4">
-        <p className="transition-smooth w-fit cursor-pointer py-4 text-lg font-semibold text-gray-700 underline-offset-2 hover:underline">
+        <p className="transition-smooth w-fit cursor-pointer py-4 text-lg font-semibold text-gray-700 underline-offset-2 hover:underline dark:text-gray-200">
           {title.rendered}
         </p>
 
         <div
           dangerouslySetInnerHTML={{ __html: sanitizeHtml(excerpt.rendered) }}
-          className="break-words"
+          className="break-words dark:text-gray-300"
         />
 
         {/* author */}
@@ -83,11 +83,11 @@ export default function BlogCard({
               fill
             />
           </div>
-          <div className="w-fit self-center">
+          <div className="w-fit self-center dark:text-gray-400">
             <Link
               href="#"
               onClick={(e) => e.stopPropagation()}
-              className="font-semibold text-gray-800"
+              className="font-semibold text-gray-800 dark:text-gray-300"
             >
               {authorName}
             </Link>

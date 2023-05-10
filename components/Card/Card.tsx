@@ -18,7 +18,7 @@ export default function Card({
   const router = useRouter();
   return (
     <div
-      className={`transition-smooth group flex w-40 ${hoverClass} flex-col justify-center rounded-md bg-white px-3 py-12 pl-8 md:w-48 md:py-16`}
+      className={`transition-smooth group flex w-40 ${hoverClass} flex-col justify-center rounded-md bg-white px-3 py-12 pl-8  dark:bg-gray-800 md:w-48 md:py-16`}
       onClick={() => router.push(`/category/${id}`)}
     >
       <div
@@ -26,7 +26,7 @@ export default function Card({
       >
         {icon}
       </div>
-      <p className="transition-smooth pt-8 text-xl font-semibold text-gray-600 group-hover:text-white md:text-2xl">
+      <p className="transition-smooth pt-8 text-xl font-semibold text-gray-600 group-hover:text-white dark:text-gray-400 md:text-2xl">
         {title}
       </p>
     </div>

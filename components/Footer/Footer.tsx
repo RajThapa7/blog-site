@@ -30,16 +30,16 @@ const data = [
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col bg-gray-200 px-[3%] pb-4 pt-12">
+    <footer className="flex flex-col bg-gray-200 px-[3%] pb-4 pt-12 dark:bg-[rgb(8,12,21)]">
       <div className="flex flex-col gap-x-36 gap-y-10 py-6 pt-10 lg:flex-row">
         <div className="flex w-full justify-center lg:w-fit">
           <SocialLinks {...{ data }} />
         </div>
         <FooterMenu className="flex-grow basis-0" />
       </div>
-      <div className="mx-auto h-[2px] w-full bg-gray-300"></div>
+      <div className="mx-auto h-[2px] w-full bg-gray-300 dark:bg-gray-800"></div>
 
-      <div className="flex w-full flex-col items-center justify-between gap-y-2 py-4 md:flex-row">
+      <div className="flex w-full flex-col items-center justify-between gap-y-2 py-4 dark:text-gray-500 md:flex-row">
         <p className="flex items-center ">&#169; 2023 RajThapa</p>
         <p className="flex items-center">
           Made with &nbsp; <AiFillHeart /> &nbsp; Kathmandu, Nepal

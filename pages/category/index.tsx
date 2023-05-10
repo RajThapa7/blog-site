@@ -1,16 +1,18 @@
-import PageLayout from "@/Layouts/PageLayout";
+import PageLayout from "@/layouts/PageLayout";
 import Loader from "@/components/Loader/Loader";
 import ArticleBlock, {
   ArticleCategoryBanner,
 } from "@/features/articles/ArticleBlock";
 import useFetchCategories from "@/features/articles/api/hooks/useFetchCategories";
 import { useRouter } from "next/router";
+import { useDarkMode } from "@/layouts/ThemeProvider";
 
 export default function Articles() {
   const categories = useFetchCategories();
   const router = useRouter();
+  const darkmode = useDarkMode()?.darkMode;
   return (
-    <PageLayout className="space-y-10 md:space-y-20">
+    <PageLayout className="space-y-10 dark:bg-gray-900 md:space-y-20">
       {categories ? (
         categories
           ?.filter((category) => category.count > 0)
@@ -21,7 +23,10 @@ export default function Articles() {
               >
                 {name}
               </ArticleCategoryBanner>
-              <ArticleBlock categoryId={id} className="shadow" />
+              <ArticleBlock
+                categoryId={id}
+                className={darkmode ? "dark-shadow" : "shadow"}
+              />
             </div>
           ))
       ) : (

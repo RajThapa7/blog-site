@@ -1,4 +1,4 @@
-import PageLayout from "@/Layouts/PageLayout";
+import PageLayout from "@/layouts/PageLayout";
 import ArticleTitle from "@/components/ArticleTitle/ArticleTitle";
 import BlogCard from "@/components/BlogCard/BlogCard";
 import BlogCardSkeletal from "@/components/Skeletal/BlogCardSkeletal";
