@@ -2,7 +2,7 @@ import useCreateApi from "@/api/useCreateApi";
 import { useQuery } from "@tanstack/react-query";
 import { AxiosInstance } from "axios";
 
-interface AuthorType {
+export interface AuthorType {
   name: string;
   avatar_urls: { [key: string]: string };
 }
