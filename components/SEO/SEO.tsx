@@ -79,6 +79,14 @@ export const SEO: FC<seoPagePropsType> = ({
         }
       />
       <meta
+        property="twitter:description"
+        content={
+          description
+            ? description
+            : "Get all tips and tricks for front end development"
+        }
+      ></meta>
+      <meta
         property="twitter:image"
         content={imageUrl ? imageUrl : "public/metafallback.webp"}
       />
