@@ -3,10 +3,10 @@ import Head from "next/head";
 import { FC } from "react";
 
 type seoPagePropsType = {
-  title?: string;
-  url?: string;
-  description?: string;
-  imageUrl?: string;
+  title: string;
+  url: string;
+  description: string;
+  imageUrl: string;
 };
 
 export const SEO: FC<seoPagePropsType> = ({
@@ -45,6 +45,10 @@ export const SEO: FC<seoPagePropsType> = ({
       />
 
       {/* <!-- Open Graph / Facebook --> */}
+      <meta
+        property="og:image"
+        content={imageUrl ? imageUrl : "public/metafallback.webp"}
+      />
       <meta property="og:image:width" content="1440"></meta>
       <meta property="og:image:height" content="975"></meta>
       <meta property="og:image:type" content="image/jpeg"></meta>
@@ -63,10 +67,6 @@ export const SEO: FC<seoPagePropsType> = ({
         content={
           title ? title.slice(0, 50) + " | Raj Thapa Blog" : "Raj Thapa Blog"
         }
-      />
-      <meta
-        property="og:image"
-        content={imageUrl ? imageUrl : "public/metafallback.webp"}
       />
 
       {/* <!-- Twitter --> */}

@@ -63,10 +63,9 @@ export default function PostIndex() {
 
   return (
     <PageLayout className="flex flex-col items-center bg-white dark:bg-gray-900 md:bg-gray-50 md:px-24 lg:px-52 xl:px-96">
-      {/* for seo  */}
-
       {post && blogTitleImg ? (
         <>
+          {/* for seo  */}
           <SEO
             imageUrl={blogTitleImg}
             url={fullCurrentPath}
