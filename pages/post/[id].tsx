@@ -1,10 +1,7 @@
 import PageLayout from "@/layouts/PageLayout";
 import Image from "next/image";
 import Raj from "public/pro.jpeg";
-import useFetchPost from "@/features/articles/api/hooks/useFetchPost";
-import useFetchFeaturedMedia from "@/features/articles/api/hooks/useFetchFeaturedImage";
 import ArticleBlock from "@/features/articles/ArticleBlock";
-import useFetchAuthor from "@/features/articles/api/hooks/useFetchAuthor";
 import useFetchCategories from "@/features/articles/api/hooks/useFetchCategories";
 import { useRouter } from "next/router";
 import { BsFacebook, BsLinkedin, BsTwitter } from "react-icons/bs";
@@ -17,14 +14,59 @@ import Loader from "@/components/Loader/Loader";
 import dateFormatter from "@/utils/dateFormatter";
 import { SEO } from "@/components/SEO/SEO";
 import { useDarkMode } from "@/layouts/ThemeProvider";
+import { GetStaticPaths, GetStaticPropsContext, NextPage } from "next";
+import {
+  IMediaType,
+  getAllPostData,
+  getAllPostsId,
+  getAuthorDetails,
+  getFeaturedMedia,
+} from "@/services/Posts.services";
+import { Post } from "@/features/articles/api/hooks/useFetchPost";
+import { AuthorType } from "@/features/articles/api/hooks/useFetchAuthor";
 
-export default function PostIndex() {
-  const postId = useRouter().query.id;
-  const post = useFetchPost(Number(postId));
+interface IPostPageType {
+  postData: Post;
+  authorData: AuthorType;
+  mediaData: IMediaType;
+}
 
-  const blogTitleImg = useFetchFeaturedMedia(post?.featured_media)?.source_url;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const allPaths = await getAllPostsId();
+  const paths = allPaths.data.map((posts) => ({
+    params: { id: posts.id.toString() },
+  }));
+  return {
+    paths,
+    fallback: "blocking",
+  };
+};
 
-  const authorDetails = useFetchAuthor(post?.author);
+export async function getStaticProps({ params }: GetStaticPropsContext) {
+  const postData = await getAllPostData(params?.id as string);
+  const authorData = await getAuthorDetails(postData?.author.toString());
+  const mediaData = await getFeaturedMedia(postData?.featured_media);
+
+  return {
+    props: {
+      postData,
+      authorData,
+      mediaData,
+    },
+    revalidate: 10,
+  };
+}
+
+const PostIndex: NextPage<IPostPageType> = ({
+  postData,
+  authorData,
+  mediaData,
+}) => {
+  const post = postData;
+
+  const blogTitleImg = mediaData?.source_url;
+
+  const authorDetails = authorData;
   const authorName = authorDetails?.name;
   const authorImg = authorDetails?.avatar_urls?.["96"];
 
@@ -125,6 +167,7 @@ export default function PostIndex() {
       )}
     </PageLayout>
   );
-}
+};
 
+export default PostIndex;
 // export async function getStaticProps() {}
