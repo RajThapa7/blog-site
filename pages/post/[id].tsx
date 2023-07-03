@@ -170,4 +170,3 @@ const PostIndex: NextPage<IPostPageType> = ({
 };
 
 export default PostIndex;
-// export async function getStaticProps() {}

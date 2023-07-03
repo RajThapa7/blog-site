@@ -11,7 +11,7 @@ interface Value {
 const ThemeProviderContext = createContext<Value | undefined>(undefined);
 
 export default function ThemeProvider({ children }: { children: ReactNode }) {
-  const [darkMode, setDarkMode] = useLocalStorage("darkMode", false);
+  const [darkMode, setDarkMode] = useLocalStorage<boolean>("darkMode", false);
 
   const value: Value = {
     darkMode,

@@ -45,7 +45,7 @@ export default function BlogCard({
 
   return (
     <div
-      className="transition-smooth z-0 h-fit w-[320px] cursor-pointer rounded-md bg-white pb-6 shadow-lg hover:bg-gray-100 dark:bg-gray-800 lg:w-[400px] xl:w-[370px]"
+      className="transition-smooth z-0 h-fit min-w-[320px] max-w-[320px] cursor-pointer rounded-md bg-white pb-6 shadow-lg hover:bg-gray-100 dark:bg-gray-800 lg:min-w-[400px] lg:max-w-[400px] xl:min-w-[370px] xl:max-w-[370px]"
       onClick={(e) => {
         router.push(`/post/${postId}`);
       }}
@@ -63,12 +63,10 @@ export default function BlogCard({
         <p className="transition-smooth w-fit cursor-pointer py-4 text-lg font-semibold text-gray-700 underline-offset-2 hover:underline dark:text-gray-200">
           {title.rendered}
         </p>
-
         <div
           dangerouslySetInnerHTML={{ __html: sanitizeHtml(excerpt.rendered) }}
           className="break-words dark:text-gray-300"
         />
-
         {/* author */}
         <div className="flex w-fit items-center justify-center gap-x-3 pt-4">
           <div className="relative h-12 w-12 rounded-full">
