@@ -23,3 +23,50 @@ body {
 .shadow-gray {
   box-shadow: -10px 20px 10px 20px rgb(249, 250, 251);
 }
+
+/* styling for the content rendered from wordpress API */
+
+.blog-title {
+  line-height: 3rem !important;
+}
+
+.wp-block-code {
+  background-color: rgb(241, 241, 241);
+  padding: 20px;
+  margin: 20px 0px 20px;
+  @apply break-words;
+}
+
+/* for wrapping word inside the pre tag  */
+
+pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.dark-mode > .wp-block-code {
+  padding: 20px;
+  margin: 20px 0px 20px;
+  @apply break-words bg-gray-800;
+}
+
+.wp-block-image {
+  margin: 40px 0px 40px;
+}
+
+.header {
+  margin: 40px 0px 15px;
+  font-family: "Rubik";
+}
+
+.subheader {
+  margin: 20px 0px 10px;
+}
+
+ul > li {
+  list-style: inside;
+}

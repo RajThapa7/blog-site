@@ -1,17 +1,14 @@
 import PageLayout from "@/layouts/PageLayout";
 import Image from "next/image";
-import Raj from "public/pro.jpeg";
 import ArticleBlock from "@/features/articles/ArticleBlock";
 import useFetchCategories from "@/features/articles/api/hooks/useFetchCategories";
 import { useRouter } from "next/router";
 import { BsFacebook, BsLinkedin, BsTwitter } from "react-icons/bs";
-import SocialLinks from "@/components/SocialLinks/SocialLinks";
 import { FaShareAlt } from "react-icons/fa";
 import { DOMAIN_NAME } from "global/globalData";
 import { useMemo } from "react";
 import catimg from "public/cat.jpg";
 import Loader from "@/components/Loader/Loader";
-import dateFormatter from "@/utils/dateFormatter";
 import { SEO } from "@/components/SEO/SEO";
 import { useDarkMode } from "@/layouts/ThemeProvider";
 import { GetStaticPaths, GetStaticPropsContext, NextPage } from "next";
@@ -24,6 +21,8 @@ import {
 } from "@/services/Posts.services";
 import { Post } from "@/features/articles/api/hooks/useFetchPost";
 import { AuthorType } from "@/features/articles/api/hooks/useFetchAuthor";
+import dateFormatter from "@/utils/dateFormatter";
+import SocialLinks from "@/components/SocialLinks/SocialLinks";
 
 interface IPostPageType {
   postData: Post;
@@ -104,7 +103,7 @@ const PostIndex: NextPage<IPostPageType> = ({
   );
 
   return (
-    <PageLayout className="flex flex-col items-center bg-white dark:bg-gray-900 md:bg-gray-50 md:px-24 lg:px-52 xl:px-96">
+    <PageLayout className="flex flex-col items-center bg-white dark:bg-gray-800 md:px-24 lg:px-52 xl:px-96">
       {post && blogTitleImg ? (
         <>
           {/* for seo  */}
@@ -115,24 +114,18 @@ const PostIndex: NextPage<IPostPageType> = ({
             description={post?.title?.rendered}
           />
 
-          <div className="w-full rounded-md pb-12 md:bg-white md:dark:bg-gray-800">
-            <div className="relative w-full pt-[60%]">
-              <Image
-                src={blogTitleImg || catimg}
-                alt="programmer"
-                fill
-                className="absolute left-0 top-0 h-full w-full rounded-t-md object-fill"
-              />
-            </div>
-            <div className="md:px-12">
-              <h2 className="pb-4 pt-10 text-xl font-semibold dark:text-gray-200 md:text-2xl lg:text-3xl">
+          <div className="w-full rounded-md pb-12 md:bg-white md:dark:bg-transparent">
+            <div className="px-3">
+              {/* title  */}
+              <h2 className="blog-title pb-4 font-['Rubik'] text-3xl font-semibold dark:text-gray-300 lg:pt-10 lg:text-[42px]">
                 {post?.title.rendered}
               </h2>
+              {/* author image and date */}
               <div className="flex w-full items-center justify-between pb-14 pt-10">
                 <div className="flex justify-between gap-x-4 ">
                   <Image
                     alt="author"
-                    src={authorImg || Raj}
+                    src={authorImg}
                     width={48}
                     height={48}
                     className="rounded-full"
@@ -144,14 +137,28 @@ const PostIndex: NextPage<IPostPageType> = ({
                 </div>
                 <SocialLinks data={data} />
               </div>
-
+            </div>
+            <div className="relative mb-12 w-full pt-[60%]">
+              <Image
+                src={blogTitleImg || catimg}
+                alt="programmer"
+                fill
+                className="absolute left-0 top-0 h-full w-full object-fill"
+              />
+            </div>
+            {/* rendered content  */}
+            <div className="md:px-12">
               <div
-                className="dark:text-gray-200"
+                className={`${
+                  dark && "dark-mode"
+                } text-[18px] leading-loose dark:text-gray-300`}
                 dangerouslySetInnerHTML={{ __html: post?.content.rendered }}
               />
             </div>
           </div>
+          {/* separator  */}
           <div className="my-20 h-[2px] w-full rounded-full bg-gray-300"></div>
+          {/* related topics */}
           <h2 className="self-start text-2xl font-semibold dark:text-gray-300">
             See Topics Related to {currentCategory?.name}
           </h2>

@@ -69,7 +69,7 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className={`transition-smooth fixed z-50 w-full bg-white dark:bg-[rgb(13,20,35)] dark:text-gray-300`}
+      className={`nav-center transition-smooth fixed z-50 w-full bg-white dark:bg-[rgb(13,20,35)] dark:text-gray-300`}
       animate={{
         y: isNavbarVisible ? 0 : -100,
         transition: {

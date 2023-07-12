@@ -61,7 +61,7 @@ const data = [
       {
         id: 0,
         title: "connect@rajthapa7.com.np",
-        link: "/css",
+        link: "mailto:connnect@rajthapa7.com.np",
       },
       {
         id: 1,
