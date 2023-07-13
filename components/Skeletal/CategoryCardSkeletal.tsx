@@ -1,3 +1,4 @@
+import { useLoaded } from "@/hooks/useLoaded";
 import { useDarkMode } from "@/layouts/ThemeProvider";
 import classNames from "@/utils/className";
 
@@ -8,6 +9,7 @@ export default function CategoryCardSkeletal({
 }) {
   const arr = Array.from(Array(6).keys());
   const darkMode = useDarkMode()?.darkMode;
+  const loaded = useLoaded();
   return (
     <div
       className={classNames(
@@ -19,7 +21,7 @@ export default function CategoryCardSkeletal({
           <div
             key={index}
             className={`${
-              darkMode ? "dark-animate-shimmer" : "animate-shimmer"
+              loaded && darkMode ? "dark-animate-shimmer" : "animate-shimmer"
             } mb-2 h-48 w-40 rounded-xl bg-gray-200 p-5 lg:h-60 lg:w-52`}
           ></div>
         );

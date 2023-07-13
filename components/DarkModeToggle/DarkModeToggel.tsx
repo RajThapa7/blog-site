@@ -1,3 +1,4 @@
+import { useLoaded } from "@/hooks/useLoaded";
 import { useDarkMode } from "@/layouts/ThemeProvider";
 import { useCallback } from "react";
 import { BsMoonFill } from "react-icons/bs";
@@ -34,17 +35,14 @@ export default function DarkModeToggle() {
 
 const DarkModeToggleButton = () => {
   const darkMode = useDarkMode()?.darkMode;
+  const loaded = useLoaded();
 
   return (
     <>
-      {!darkMode && <BsMoonFill size={25} className="text-purple-500" />}
-      {darkMode && <FaSun size={25} className="text-yellow-500" />}
+      {!darkMode && loaded && (
+        <BsMoonFill size={25} className="text-purple-500" />
+      )}
+      {darkMode && loaded && <FaSun size={25} className="text-yellow-500" />}
     </>
   );
 };
-
-// darkMode ? (
-//   <FaSun size={25} className="text-yellow-500" />
-// ) : (
-//   <BsMoonFill size={25} className="text-purple-500" />
-// );

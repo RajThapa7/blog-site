@@ -23,6 +23,7 @@ import { Post } from "@/features/articles/api/hooks/useFetchPost";
 import { AuthorType } from "@/features/articles/api/hooks/useFetchAuthor";
 import dateFormatter from "@/utils/dateFormatter";
 import SocialLinks from "@/components/SocialLinks/SocialLinks";
+import { useLoaded } from "@/hooks/useLoaded";
 
 interface IPostPageType {
   postData: Post;
@@ -77,6 +78,8 @@ const PostIndex: NextPage<IPostPageType> = ({
   const fullCurrentPath = DOMAIN_NAME + currentPath;
 
   const dark = useDarkMode()?.darkMode;
+
+  const loaded = useLoaded();
 
   const data = useMemo(
     () => [
@@ -150,7 +153,7 @@ const PostIndex: NextPage<IPostPageType> = ({
             <div className="md:px-12">
               <div
                 className={`${
-                  dark && "dark-mode"
+                  loaded && dark && "dark-mode"
                 } text-[18px] leading-loose dark:text-gray-300`}
                 dangerouslySetInnerHTML={{ __html: post?.content.rendered }}
               />
@@ -165,7 +168,9 @@ const PostIndex: NextPage<IPostPageType> = ({
           <div className="w-full">
             <ArticleBlock
               categoryId={currentCategory?.id}
-              className={dark ? "dark-shadow" : "shadow-gray !bg-gray-50"}
+              className={
+                loaded && dark ? "dark-shadow" : "shadow-gray !bg-gray-50"
+              }
             />
           </div>
         </>
